@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: php-web
+    ports:
+      - "8080:80"
+    volumes:
+      # Live‑reload code: edit files on the host, refresh the browser
+      - ./src:/var/www/html
+    environment:
+      # Pass DB creds to PHP (optional; use in PDO / mysqli)
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=studentdb
+      - MYSQL_USER=student
+      - MYSQL_PASSWORD=studentpass
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.3
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: studentdb
+      MYSQL_USER: student
+      MYSQL_PASSWORD: studentpass
+    volumes:
+      - db_data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
