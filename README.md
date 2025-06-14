@@ -24,8 +24,8 @@ This project sets up a complete PHP development environment using Docker. It inc
 ### 1. Clone or download this repo
 
 ```bash
-git clone https://github.com/your-repo/php-docker-learn.git
-cd php-docker-learn
+git clone https://github.com/sanjaysagar12/php-docker-student-kit.git
+cd php-docker-student-kit/
 ```
 
 ### 2. Add your PHP files
